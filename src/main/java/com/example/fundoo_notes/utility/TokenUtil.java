@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TokenUtil {
-    private static final String TOKEN_SECRET = "BookStore";
+    private static final String TOKEN_SECRET = "Fundoo_Notes";
 
     public String createToken(Long Id)   {
         try {

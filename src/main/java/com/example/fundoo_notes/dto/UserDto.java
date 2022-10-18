@@ -26,8 +26,6 @@ public class UserDto {
     private LocalDateTime registerDate = LocalDateTime.now();
     @Column(name = "updateddate")
     private LocalDateTime updatedDate;
-    @Column(name = "verification")
-    private boolean verify;
     @Column(name="profile")
     private String profilepic;
 

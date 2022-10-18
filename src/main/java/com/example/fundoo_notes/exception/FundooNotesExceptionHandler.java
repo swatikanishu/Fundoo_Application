@@ -29,4 +29,15 @@ public class FundooNotesExceptionHandler {
         ResponseDto resDTO = new ResponseDto("Exception while processing User REST request", exception.getMessage());
         return new ResponseEntity(resDTO, HttpStatus.BAD_REQUEST);
     }
+     @ExceptionHandler(OtpException.class)
+     public ResponseEntity<ResponseDto> handleAddressBookException(OtpException exception){
+         ResponseDto resDTO = new ResponseDto("Exception while processing User REST request", exception.getMessage());
+         return new ResponseEntity(resDTO, HttpStatus.BAD_REQUEST);
+     }
+     @ExceptionHandler(NoteException.class)
+     public ResponseEntity<ResponseDto> handleAddressBookException(NoteException exception){
+         ResponseDto resDTO = new ResponseDto("Exception while processing User REST request", exception.getMessage());
+         return new ResponseEntity(resDTO, HttpStatus.BAD_REQUEST);
+     }
+
 }

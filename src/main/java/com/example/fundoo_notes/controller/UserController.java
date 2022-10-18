@@ -1,9 +1,7 @@
 package com.example.fundoo_notes.controller;
 
-import com.example.fundoo_notes.dto.ForgotPasswordDto;
-import com.example.fundoo_notes.dto.LoginDto;
-import com.example.fundoo_notes.dto.ResponseDto;
-import com.example.fundoo_notes.dto.UserDto;
+import com.example.fundoo_notes.dto.*;
+import com.example.fundoo_notes.model.Note;
 import com.example.fundoo_notes.model.User;
 import com.example.fundoo_notes.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +19,7 @@ public class UserController {
     IUserService userService;
     // Add new user data
     @PostMapping("/register")
-    public ResponseEntity<String> AddAddressDetails(@Valid @RequestBody UserDto userDto) {
+    public ResponseEntity<String> AddUserDetails(@Valid @RequestBody UserDto userDto) {
         String token = userService.addRecord(userDto);
         ResponseDto respDTO = new ResponseDto("Data Added Successfully", token);
         return new ResponseEntity(respDTO, HttpStatus.CREATED);
@@ -34,8 +32,8 @@ public class UserController {
     }
     //Login check
     @PostMapping("/login")
-    public ResponseEntity<ResponseDto> loginUser(@RequestBody LoginDto loginDTO) {
-        String response = userService.loginUser(loginDTO);
+    public ResponseEntity<ResponseDto> loginUser(@RequestBody OtpLoginDto otpLoginDto) {
+        String response = userService.loginUser(otpLoginDto);
         ResponseDto responseDTO = new ResponseDto("Login Status:", response);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }    //Forgot Password
@@ -51,5 +49,25 @@ public class UserController {
         ResponseDto responseDTO = new ResponseDto("Password Reset", response);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
+@PostMapping("/GetOtp/{emailid}")
+public ResponseEntity<ResponseDto> getotp(@PathVariable String emailid) {
+        String response = userService.getotp(emailid);
 
+    ResponseDto responseDTO = new ResponseDto("Otp status", response);
+    return new ResponseEntity<>(responseDTO, HttpStatus.OK);
 }
+    @GetMapping("/verify/{token}")
+    public ResponseEntity<ResponseDto> verifyUser(@PathVariable String token) {
+        String user =userService.verifyUser(token);
+        ResponseDto responseDTO = new ResponseDto("User verified successfully", user);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<ResponseDto> updateById(@PathVariable Long id, @Valid @RequestBody UserDto userDto) {
+        User user= userService.editById(userDto, id);
+        ResponseDto respDTO = new ResponseDto(" **** Note details is updated *****", user);
+        return new ResponseEntity<>(respDTO, HttpStatus.OK);
+    }
+
+    }
+

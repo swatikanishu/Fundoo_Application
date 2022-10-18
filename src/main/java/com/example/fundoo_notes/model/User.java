@@ -48,7 +48,6 @@ public class User {
      this.dob= userDto.getDob();
      this.profilepic= userDto.getProfilepic();
      this.phoneno= userDto.getPhoneno();
-     this.verify= userDto.isVerify();
      this.registerDate=userDto.getRegisterDate();
     this.updatedDate=userDto.getUpdatedDate();
 
